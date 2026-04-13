@@ -1,5 +1,23 @@
 # Astro Starter Kit: Portfolio
 
+## Custom 
+
+### Deployment
+
+#### Procedure
+
+- Development on `dev` branch
+- Start interactive server with`npm run dev` (will update on file changes)
+- Commit on `dev`
+- Merge to `main`
+- Pushing `main` to remote will run a GitHub workflow that deploys the website to Cyon
+
+#### Setup
+
+
+
+## Official 
+
 ```sh
 npm create astro@latest -- --template portfolio
 ```
