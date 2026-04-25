@@ -118,6 +118,31 @@ const { Content } = await render(entry);
 		color: var(--gray-0);
 	}
 
+	.content :global(h1),
+	.content :global(h2),
+	.content :global(h3),
+	.content :global(h4),
+	.content :global(h5) {
+		position: relative;
+	}
+
+	.content :global(.anchor-link) {
+		opacity: 0;
+		margin-left: 0.4em;
+		font-size: 0.85em;
+		text-decoration: none;
+		color: var(--gray-400);
+		transition: opacity var(--theme-transition);
+	}
+
+	.content :global(h1:hover .anchor-link),
+	.content :global(h2:hover .anchor-link),
+	.content :global(h3:hover .anchor-link),
+	.content :global(h4:hover .anchor-link),
+	.content :global(h5:hover .anchor-link) {
+		opacity: 1;
+	}
+
 	.back-link,
 	.content :global(a) {
 		text-decoration: 1px solid underline transparent;
