@@ -51,8 +51,6 @@ Optional rules can be toggled in Settings:
 • Same Value Allowed — announcing the same value as the previous player is permitted.
 • 31 Reverses Direction — announcing 31 reverses the turn order.
 
-<span id="privacy-policy"></span>
-
 ### 🛡️ Privacy Policy
 Last updated: April 2026
 
