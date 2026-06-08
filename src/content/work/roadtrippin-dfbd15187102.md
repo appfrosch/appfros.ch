@@ -11,6 +11,7 @@ tags:
   - iOS
   - Android
   - travel
+draft: true
 ---
 
 ### About the app
@@ -35,6 +36,10 @@ Invite a travel companion by email. Assign them a role — viewer or editor — 
 
 #### 🔄 Offline Support
 Trip data is cached locally. If you lose connectivity, your itinerary stays accessible; changes sync automatically when you're back online.
+
+### Team
+
+RoadTrippin is a collaboration between [Andreas Seeger](https://appfros.ch), [treboc](https://github.com/treboc), and [Mats Wiese](https://github.com/MatsWiese).
 
 ### 🛡️ Privacy Policy
 Last updated: June 2026

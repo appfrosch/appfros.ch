@@ -6,9 +6,9 @@ import Hero from '../components/Hero.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const projects = (await getCollection('work')).sort(
-	(a, b) => a.data.title.localeCompare(b.data.title),
-);
+const projects = (await getCollection('work'))
+	.filter((project) => !project.data.draft)
+	.sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 
 <BaseLayout
