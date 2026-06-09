@@ -12,6 +12,10 @@ export const collections = {
 			img: z.string(),
 			img_alt: z.string().optional(),
 			draft: z.boolean().default(false),
+			// Beta-testing CTA (renders the TestFlight alert + enrollment form at the top of the page).
+			beta: z.boolean().default(false),
+			testflightUrl: z.string().optional(),
+			androidTestUrl: z.string().optional(),
 		}),
 	}),
 	blog: defineCollection({

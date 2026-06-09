@@ -12,6 +12,10 @@ tags:
   - Android
   - travel
 draft: true
+beta: true
+# TODO: replace with the real Apple TestFlight public link (https://testflight.apple.com/join/XXXXXXXX)
+testflightUrl: https://testflight.apple.com/join/REPLACE_ME
+# androidTestUrl: add the Google Play testing opt-in URL here once available
 ---
 
 ### About the app

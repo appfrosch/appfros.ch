@@ -5,6 +5,7 @@ import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
+import TestFlightCTA from '../../components/TestFlightCTA.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 interface Props {
@@ -44,6 +45,12 @@ const { Content } = await render(entry);
 			</header>
 			<main class="wrapper">
 				<div class="stack gap-10 content">
+					{entry.data.beta && (
+						<TestFlightCTA
+							testflightUrl={entry.data.testflightUrl}
+							androidTestUrl={entry.data.androidTestUrl}
+						/>
+					)}
 					{entry.data.img && <img class="icon" src={entry.data.img} alt={entry.data.img_alt || ''} />}
 					<div class="content">
 						<Content />
