@@ -1,45 +1,30 @@
 ---
-// Beta-testing alert + enrollment CTA, rendered at the top of a work page when `beta: true`.
-// The email form posts straight to Supabase (insert-only RLS), so no server is needed.
-interface Props {
-	/** Apple TestFlight public link, e.g. https://testflight.apple.com/join/XXXXXXXX */
-	testflightUrl?: string;
-	/** Google Play closed/open-testing opt-in URL. Button is shown as "coming soon" when absent. */
-	androidTestUrl?: string;
-}
-
-const { testflightUrl, androidTestUrl } = Astro.props;
+// Beta-testing alert + email signup, rendered at the top of a work page when `beta: true`.
+// We collect interested testers' emails (we reach out with invites) rather than letting
+// people self-enroll. The form posts straight to Supabase (insert-only RLS), so no server
+// is needed.
 ---
 
 <section class="beta-cta" aria-labelledby="beta-cta-title">
 	<div class="badge">🧪 Now in beta</div>
-	<h2 id="beta-cta-title">RoadTrippin is in public beta testing</h2>
+	<h2 id="beta-cta-title">RoadTrippin is in beta testing</h2>
 	<p class="lead">
 		The app isn't on the App Store or Google Play yet — it's being tested through
-		Apple TestFlight and Google Play testing. Want an early look? Join a beta below,
-		or leave your email and we'll reach out with an invite.
+		Apple TestFlight and Google Play testing. Want to help test it? Leave your email
+		and we'll reach out with an invite.
 	</p>
 
-	<div class="enroll">
-		{testflightUrl ? (
-			<a class="btn btn-primary" href={testflightUrl} target="_blank" rel="noopener noreferrer">
-				 Join the iOS beta (TestFlight)
-			</a>
-		) : (
-			<span class="btn btn-disabled" aria-disabled="true"> iOS beta — link coming soon</span>
-		)}
-
-		{androidTestUrl ? (
-			<a class="btn btn-primary" href={androidTestUrl} target="_blank" rel="noopener noreferrer">
-				▶ Join the Android beta
-			</a>
-		) : (
-			<span class="btn btn-disabled" aria-disabled="true">▶ Android beta — coming soon</span>
-		)}
-	</div>
-
 	<form class="signup" id="beta-signup" novalidate>
-		<label class="field-label" for="beta-email">Or get notified when there's a spot</label>
+		<fieldset class="platforms">
+			<legend class="field-label">Which beta(s) are you interested in?</legend>
+			<label class="check">
+				<input type="checkbox" id="want-ios" name="ios" /> iOS (TestFlight)
+			</label>
+			<label class="check">
+				<input type="checkbox" id="want-android" name="android" /> Android (Play testing)
+			</label>
+		</fieldset>
+		<label class="field-label" for="beta-email">Your email</label>
 		<div class="row">
 			<input
 				type="email"
@@ -50,7 +35,7 @@ const { testflightUrl, androidTestUrl } = Astro.props;
 				placeholder="you@example.com"
 				required
 			/>
-			<button type="submit" id="beta-submit">Keep me posted</button>
+			<button type="submit" id="beta-submit">Notify me</button>
 		</div>
 		<p class="form-status" id="beta-status" role="status" aria-live="polite"></p>
 	</form>
@@ -62,6 +47,8 @@ const { testflightUrl, androidTestUrl } = Astro.props;
 
 	const form = document.getElementById('beta-signup') as HTMLFormElement | null;
 	const input = document.getElementById('beta-email') as HTMLInputElement | null;
+	const iosBox = document.getElementById('want-ios') as HTMLInputElement | null;
+	const androidBox = document.getElementById('want-android') as HTMLInputElement | null;
 	const button = document.getElementById('beta-submit') as HTMLButtonElement | null;
 	const status = document.getElementById('beta-status');
 
@@ -82,6 +69,13 @@ const { testflightUrl, androidTestUrl } = Astro.props;
 			return;
 		}
 
+		const wantsIos = !!iosBox?.checked;
+		const wantsAndroid = !!androidBox?.checked;
+		if (!wantsIos && !wantsAndroid) {
+			setStatus('Please choose at least one platform — iOS, Android, or both.', 'error');
+			return;
+		}
+
 		if (!url || !key) {
 			setStatus("Signups aren't configured yet — please email splash@appfros.ch.", 'error');
 			return;
@@ -99,7 +93,7 @@ const { testflightUrl, androidTestUrl } = Astro.props;
 					Authorization: `Bearer ${key}`,
 					Prefer: 'return=minimal',
 				},
-				body: JSON.stringify({ email }),
+				body: JSON.stringify({ email, wants_ios: wantsIos, wants_android: wantsAndroid }),
 			});
 
 			if (res.ok) {
@@ -145,52 +139,9 @@ const { testflightUrl, androidTestUrl } = Astro.props;
 	}
 
 	.lead {
-		margin: 0 0 1.25rem;
+		margin: 0 0 1.5rem;
 		color: var(--gray-300);
 		max-width: 60ch;
-	}
-
-	.enroll {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-		margin-bottom: 1.5rem;
-	}
-
-	.btn {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.4em;
-		padding: 0.6em 1.25em;
-		border-radius: 999rem;
-		font-size: var(--text-md);
-		line-height: 1.1;
-		text-decoration: none;
-		white-space: nowrap;
-	}
-
-	.btn-primary {
-		color: var(--accent-text-over);
-		background: var(--gradient-accent-orange);
-		box-shadow: var(--shadow-sm);
-		transition: filter var(--theme-transition);
-	}
-
-	.btn-primary:hover,
-	.btn-primary:focus {
-		filter: brightness(1.08);
-	}
-
-	.btn-disabled {
-		color: var(--gray-400);
-		background-color: var(--gray-800);
-		border: 1px solid var(--gray-700);
-		cursor: not-allowed;
-	}
-
-	.signup {
-		border-top: 1px solid var(--gray-800);
-		padding-top: 1.25rem;
 	}
 
 	.field-label {
@@ -198,6 +149,28 @@ const { testflightUrl, androidTestUrl } = Astro.props;
 		margin-bottom: 0.5rem;
 		font-size: var(--text-sm);
 		color: var(--gray-300);
+	}
+
+	.platforms {
+		margin: 0 0 1rem;
+		padding: 0;
+		border: 0;
+	}
+
+	.check {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-right: 1.25rem;
+		color: var(--gray-200);
+		cursor: pointer;
+	}
+
+	.check input {
+		width: 1.1rem;
+		height: 1.1rem;
+		accent-color: var(--accent-regular);
+		cursor: pointer;
 	}
 
 	.row {
