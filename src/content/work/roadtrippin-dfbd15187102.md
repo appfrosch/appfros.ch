@@ -39,7 +39,7 @@ Trip data is cached locally. If you lose connectivity, your itinerary stays acce
 
 ### Team
 
-RoadTrippin is a collaboration between [Andreas Seeger](https://appfros.ch), [treboc](https://github.com/treboc), and [Mats Wiese](https://github.com/MatsWiese).
+RoadTrippin is a collaboration between [Andreas Seeger](https://appfros.ch), [treboc](https://github.com/treboc), and [MatsWiese](https://handsfreelaptimer.matswiese.app).
 
 ### 🛡️ Privacy Policy
 Last updated: June 2026
