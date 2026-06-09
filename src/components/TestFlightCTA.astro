@@ -1,0 +1,243 @@
+---
+// Beta-testing alert + email signup, rendered at the top of a work page when `beta: true`.
+// We collect interested testers' emails (we reach out with invites) rather than letting
+// people self-enroll. The form posts straight to Supabase (insert-only RLS), so no server
+// is needed.
+---
+
+<section class="beta-cta" aria-labelledby="beta-cta-title">
+	<div class="badge">🧪 Now in beta</div>
+	<h2 id="beta-cta-title">RoadTrippin is in beta testing</h2>
+	<p class="lead">
+		The app isn't on the App Store or Google Play yet — it's being tested through
+		Apple TestFlight and Google Play testing. Want to help test it? Leave your email
+		and we'll reach out with an invite.
+	</p>
+
+	<form class="signup" id="beta-signup" novalidate>
+		<fieldset class="platforms">
+			<legend class="field-label">Which beta(s) are you interested in?</legend>
+			<label class="check">
+				<input type="checkbox" id="want-ios" name="ios" /> iOS (TestFlight)
+			</label>
+			<label class="check">
+				<input type="checkbox" id="want-android" name="android" /> Android (Play testing)
+			</label>
+		</fieldset>
+		<label class="field-label" for="beta-email">Your email</label>
+		<div class="row">
+			<input
+				type="email"
+				id="beta-email"
+				name="email"
+				inputmode="email"
+				autocomplete="email"
+				placeholder="you@example.com"
+				required
+			/>
+			<button type="submit" id="beta-submit">Notify me</button>
+		</div>
+		<p class="form-status" id="beta-status" role="status" aria-live="polite"></p>
+	</form>
+</section>
+
+<script>
+	const url = import.meta.env.PUBLIC_SUPABASE_URL;
+	const key = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+
+	const form = document.getElementById('beta-signup') as HTMLFormElement | null;
+	const input = document.getElementById('beta-email') as HTMLInputElement | null;
+	const iosBox = document.getElementById('want-ios') as HTMLInputElement | null;
+	const androidBox = document.getElementById('want-android') as HTMLInputElement | null;
+	const button = document.getElementById('beta-submit') as HTMLButtonElement | null;
+	const status = document.getElementById('beta-status');
+
+	function setStatus(message: string, kind: 'ok' | 'error' | '') {
+		if (!status) return;
+		status.textContent = message;
+		status.dataset.kind = kind;
+	}
+
+	form?.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		if (!input || !button) return;
+
+		const email = input.value.trim();
+		if (!email || !input.checkValidity()) {
+			setStatus('Please enter a valid email address.', 'error');
+			input.focus();
+			return;
+		}
+
+		const wantsIos = !!iosBox?.checked;
+		const wantsAndroid = !!androidBox?.checked;
+		if (!wantsIos && !wantsAndroid) {
+			setStatus('Please choose at least one platform — iOS, Android, or both.', 'error');
+			return;
+		}
+
+		if (!url || !key) {
+			setStatus("Signups aren't configured yet — please email splash@appfros.ch.", 'error');
+			return;
+		}
+
+		button.disabled = true;
+		setStatus('Saving…', '');
+
+		try {
+			const res = await fetch(`${url}/rest/v1/testflight_signups`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: key,
+					Authorization: `Bearer ${key}`,
+					Prefer: 'return=minimal',
+				},
+				body: JSON.stringify({ email, wants_ios: wantsIos, wants_android: wantsAndroid }),
+			});
+
+			if (res.ok) {
+				form.reset();
+				setStatus("You're on the list — we'll be in touch. Thanks! 🎉", 'ok');
+			} else if (res.status === 409) {
+				// Unique-index violation: this email is already signed up.
+				setStatus("You're already on the list — sit tight! 🙌", 'ok');
+			} else {
+				setStatus('Something went wrong. Please try again, or email splash@appfros.ch.', 'error');
+			}
+		} catch {
+			setStatus('Network error. Please check your connection and try again.', 'error');
+		} finally {
+			button.disabled = false;
+		}
+	});
+</script>
+
+<style>
+	.beta-cta {
+		padding: 1.5rem;
+		border: 1px solid var(--accent-regular);
+		border-radius: 1.5rem;
+		background: var(--gradient-subtle);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.badge {
+		display: inline-flex;
+		padding: 0.35rem 0.85rem;
+		margin-bottom: 0.75rem;
+		color: var(--accent-text-over);
+		background-color: var(--accent-regular);
+		border-radius: 999rem;
+		font-size: var(--text-sm);
+		font-weight: 600;
+	}
+
+	.beta-cta h2 {
+		margin: 0 0 0.5rem;
+		font-size: var(--text-xl);
+	}
+
+	.lead {
+		margin: 0 0 1.5rem;
+		color: var(--gray-300);
+		max-width: 60ch;
+	}
+
+	.field-label {
+		display: block;
+		margin-bottom: 0.5rem;
+		font-size: var(--text-sm);
+		color: var(--gray-300);
+	}
+
+	.platforms {
+		margin: 0 0 1rem;
+		padding: 0;
+		border: 0;
+	}
+
+	.check {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-right: 1.25rem;
+		color: var(--gray-200);
+		cursor: pointer;
+	}
+
+	.check input {
+		width: 1.1rem;
+		height: 1.1rem;
+		accent-color: var(--accent-regular);
+		cursor: pointer;
+	}
+
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+	}
+
+	.row input {
+		flex: 1 1 16rem;
+		min-width: 0;
+		padding: 0.65rem 0.9rem;
+		font: inherit;
+		color: var(--gray-0);
+		background-color: var(--gray-999);
+		border: 1px solid var(--gray-700);
+		border-radius: 0.75rem;
+	}
+
+	.row input:focus {
+		outline: 2px solid var(--accent-regular);
+		outline-offset: 1px;
+	}
+
+	.row button {
+		padding: 0.65rem 1.4rem;
+		font: inherit;
+		font-weight: 600;
+		color: var(--accent-text-over);
+		background: var(--gradient-accent-orange);
+		border: none;
+		border-radius: 0.75rem;
+		cursor: pointer;
+		box-shadow: var(--shadow-sm);
+		transition: filter var(--theme-transition);
+	}
+
+	.row button:hover:not(:disabled),
+	.row button:focus:not(:disabled) {
+		filter: brightness(1.08);
+	}
+
+	.row button:disabled {
+		opacity: 0.6;
+		cursor: progress;
+	}
+
+	.form-status {
+		margin: 0.75rem 0 0;
+		min-height: 1.25rem;
+		font-size: var(--text-sm);
+	}
+
+	.form-status[data-kind='ok'] {
+		color: var(--accent-dark);
+	}
+
+	.form-status[data-kind='error'] {
+		color: #d73a4a;
+	}
+
+	@media (min-width: 50em) {
+		.beta-cta {
+			padding: 2rem;
+		}
+		.beta-cta h2 {
+			font-size: var(--text-2xl);
+		}
+	}
+</style>

@@ -12,6 +12,8 @@ export const collections = {
 			img: z.string(),
 			img_alt: z.string().optional(),
 			draft: z.boolean().default(false),
+			// Beta-testing CTA (renders the TestFlight alert + email signup at the top of the page).
+			beta: z.boolean().default(false),
 		}),
 	}),
 	blog: defineCollection({
