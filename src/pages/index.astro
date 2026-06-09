@@ -14,8 +14,9 @@ import About from '../pages/about.astro';
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Content Fetching: List four most recent work projects
+// Content Fetching: up to four published work projects, A→Z by title (drafts excluded, matching /work).
 const projects = (await getCollection('work'))
+	.filter((project) => !project.data.draft)
 	.sort((a, b) => a.data.title.localeCompare(b.data.title))
 	.slice(0, 4);
 
