@@ -13,9 +13,6 @@ tags:
   - travel
 draft: true
 beta: true
-# TODO: replace with the real Apple TestFlight public link (https://testflight.apple.com/join/XXXXXXXX)
-testflightUrl: https://testflight.apple.com/join/REPLACE_ME
-# androidTestUrl: add the Google Play testing opt-in URL here once available
 ---
 
 ### About the app
@@ -43,7 +40,7 @@ Trip data is cached locally. If you lose connectivity, your itinerary stays acce
 
 ### Team
 
-RoadTrippin is a collaboration between [Andreas Seeger](https://appfros.ch), [treboc](https://github.com/treboc), and [MatsWiese](https://handsfreelaptimer.matswiese.app).
+RoadTrippin is a collaboration between [Appfrosch](https://appfros.ch), [treboc](https://github.com/treboc), and [MatsWiese](https://handsfreelaptimer.matswiese.app).
 
 ### 🛡️ Privacy Policy
 Last updated: June 2026
@@ -55,10 +52,10 @@ RoadTrippin stores your email address and the trip data you create (trips, stati
 Sign-up and sign-in are handled by Supabase Auth. Passwords are never stored in plain text. Session tokens are kept in secure local storage on your device.
 
 #### 📵 No tracking
-RoadTrippin does not use analytics SDKs, advertising identifiers, or third-party tracking of any kind.
+RoadTrippin currently uses no analytics, advertising identifiers, or third-party tracking of any kind. We may introduce limited analytics in the future to help improve the app; if we do, we'll update this policy first.
 
 #### 🗑️ Data deletion
-You can delete your account and all associated data at any time from within the app. Deletion is permanent and immediate.
+You can delete your account and all associated data at any time. For now this is a manual process: email us at splash@appfros.ch and we'll remove your account and everything tied to it. Deletion is permanent. In-app self-service deletion is a planned feature.
 
 #### 🍪 Local storage
 A local database on your device caches your trip data for offline use. This data is only accessible by the app and is removed when you delete the app or your account.
