@@ -21,6 +21,11 @@ jobs:
       
     - name: Build Astro site
       run: npm run build
+      env:
+        # Public Supabase config for the beta-signup form (see .env.example).
+        # Safe to expose: publishable key against an insert-only table.
+        PUBLIC_SUPABASE_URL: ${{ vars.PUBLIC_SUPABASE_URL }}
+        PUBLIC_SUPABASE_ANON_KEY: ${{ vars.PUBLIC_SUPABASE_ANON_KEY }}
       
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.8.0
