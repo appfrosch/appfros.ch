@@ -25,4 +25,12 @@ export const collections = {
 			tags: z.array(z.string()).optional(),
 		}),
 	}),
+	pages: defineCollection({
+		loader: glob({ base: './src/content/pages', pattern: '**/*.md' }),
+		schema: z.object({
+			title: z.string(),
+			tagline: z.string(),
+			description: z.string(),
+		}),
+	}),
 };

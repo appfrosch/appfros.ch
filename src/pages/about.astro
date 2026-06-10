@@ -1,53 +1,22 @@
 ---
-import ContactCTA from '../components/ContactCTA.astro';
+import { getEntry, render } from 'astro:content';
+
 import Hero from '../components/Hero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const about = await getEntry('pages', 'about');
+const { Content } = await render(about);
+const { title, tagline, description } = about.data;
 ---
 
-<BaseLayout title="About | Appfrosch" description="About Appfrosch Indy Development">
+<BaseLayout title={`${title} | Appfrosch`} description={description}>
 	<div class="stack gap-20">
 		<main class="wrapper about">
-			<Hero
-				title="About"
-				tagline="Thanks for stopping by."
-			>
-				<!-- <img
-					width="1553"
-					height="873"
-					src="/assets/at-work.jpg"
-					alt="Jeanine White at work with a colleague"
-				/> -->
-			</Hero>
-
-			<section>
-				<h2 class="section-title">Background</h2>
-				<div class="content">
-					<p>
-						Developer at a mid-sized company working on the company's tools for resource planning at day,
-						tinkerer and dabbler in all delevepment related stuff on Apple platforms at night and on weekends.
-					</p>
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">App Development</h2>
-				<div>
-					<p>
-						I have been interested in creating apps for iOS and macOS for a long time. 
-						I have started numerous projects. Some of them for personal use only, some of them with the potential 
-						of being useful for others as well.<br />
-						Even though not all of these projects were brought to a larger audience (yet), I learnt (and still learn) a little something with any of them,
-						enabling me to be more productive and effective in the next project I tried. Some of theses projects I still 
-						actively work on.
-					</p>
-					<br />
-					<p>
-						I am now at a stage were some of these projects are getting to a stage were I feel comfortable showing them to a larger audience.
-					</p>
-				</div>
-			</section>
+			<Hero title={title} tagline={tagline} />
+			<div class="content">
+				<Content />
+			</div>
 		</main>
-
-		<!-- <ContactCTA /> -->
 	</div>
 </BaseLayout>
 
@@ -58,27 +27,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		gap: 3.5rem;
 	}
 
-	img {
-		margin-top: 1.5rem;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
-
-	section {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
+	.content {
+		max-width: 65ch;
+		margin-inline: auto;
 		color: var(--gray-200);
 	}
 
-	.section-title {
-		grid-column-start: 1;
+	.content > :global(* + *) {
+		margin-top: 1rem;
+	}
+
+	.content :global(h2) {
+		position: relative;
+		margin: 1.5rem 0 0.5rem;
 		font-size: var(--text-xl);
 		color: var(--gray-0);
 	}
 
-	.content {
-		grid-column: 2 / 4;
+	.content :global(.anchor-link) {
+		opacity: 0;
+		margin-left: 0.4em;
+		font-size: 0.85em;
+		text-decoration: none;
+		color: var(--gray-400);
+		transition: opacity var(--theme-transition);
+	}
+
+	.content :global(h2:hover .anchor-link) {
+		opacity: 1;
 	}
 
 	.content :global(a) {
@@ -93,17 +69,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	}
 
 	@media (min-width: 50em) {
-		.about {
-			display: grid;
-			grid-template-columns: 1fr 60% 1fr;
-		}
-
-		.about > :global(:first-child) {
-			grid-column-start: 2;
-		}
-
-		section {
-			display: contents;
+		.content {
 			font-size: var(--text-lg);
 		}
 	}
