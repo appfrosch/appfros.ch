@@ -1,4 +1,25 @@
-# Astro Starter Kit: Portfolio
+# appfros.ch
+
+Personal website of Andreas Seeger, built with [Astro](https://astro.build).
+
+## Licensing
+
+This repository is **source-available** and split into two parts:
+
+- **Code** — everything *except* the content/assets listed below (Astro
+  components, layouts, styles, config, build scripts) is licensed under the
+  **[MIT License](./LICENSE)**. You are welcome to reuse it.
+- **Content & branding** — all site **content and creative assets are
+  © 2026 Appfrosch, all rights reserved**, and are **not** covered by the
+  MIT License. This includes:
+  - written content (`src/content/**`, page copy, project write-ups such as
+    RoadTrippin / Mäxle),
+  - images, icons, logos, and the **appfros** / project names and marks.
+
+  Do not copy, republish, or reuse the content or branding without permission.
+
+Contributions are welcome via pull request; by submitting one you agree your
+**code** contribution is provided under the MIT License above.
 
 ## Custom 
 
