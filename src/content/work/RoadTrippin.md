@@ -53,8 +53,23 @@ Sign-up and sign-in are handled by Supabase Auth. Passwords are never stored in 
 #### 📵 No tracking
 RoadTrippin currently uses no analytics, advertising identifiers, or third-party tracking of any kind. We may introduce limited analytics in the future to help improve the app; if we do, we'll update this policy first.
 
-#### 🗑️ Data deletion
-You can delete your account and all associated data at any time. For now this is a manual process: email us at splash@appfros.ch and we'll remove your account and everything tied to it. Deletion is permanent. In-app self-service deletion is a planned feature.
+#### 🗑️ Account deletion
+You can ask us to delete your RoadTrippin account and all associated data at any time.
+
+**How to request** — Email splash@appfros.ch from the email address registered to your RoadTrippin account, with the subject "Delete my account." We may reply to confirm it's really you before proceeding.
+
+**What we delete** — Once we process your request, we permanently remove:
+
+- your account and login credentials (email address, username);
+- every trip you own and its contents — stops and places (including saved locations), dates, descriptions, icons, tags, notes, and packing lists;
+- your profile details and profile photo;
+- your access to any trips that were shared with you, and your email address from those trips' shared-member lists.
+
+Trips owned by other people remain theirs; we simply remove your access and your email from their member lists.
+
+**When** — We action deletion requests within 30 days. Any residual copies in our encrypted backups are removed on our normal backup-rotation cycle, no later than 90 days after deletion.
+
+**Retention** — We do not keep your personal data after deletion, except where the law requires us to.
 
 #### 🍪 Local storage
 A local database on your device caches your trip data for offline use. This data is only accessible by the app and is removed when you delete the app or your account.
