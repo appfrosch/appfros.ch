@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { toLocalePath } from '../i18n/ui';
 
 interface Props {
 	title?: string | undefined;
@@ -10,6 +11,11 @@ const {
 	title = 'Appfrosch: Portfolio Site',
 	description = 'The portfolio site of Appfrsosch\'s indy development',
 } = Astro.props;
+
+// hreflang alternates: every page exists at the same slug in both locales, so we can
+// derive the alternate URLs by toggling the locale prefix on the current path.
+const enPath = toLocalePath(Astro.url.pathname, 'en');
+const dePath = toLocalePath(Astro.url.pathname, 'de');
 ---
 
 <meta charset="UTF-8" />
@@ -17,6 +23,10 @@ const {
 <meta name="viewport" content="width=device-width" />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
+
+<link rel="alternate" hreflang="en" href={enPath} />
+<link rel="alternate" hreflang="de" href={dePath} />
+<link rel="alternate" hreflang="x-default" href={enPath} />
 
 <link rel="icon" type="image/svg+xml" href="/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />

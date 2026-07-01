@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Hero from '../Hero.astro';
+import { localeOf, slugOf, toLocalePath, useTranslations, type Lang } from '../../i18n/ui';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const posts = (await getCollection('blog'))
+	.filter((post) => localeOf(post.id) === lang)
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const dateLocale = lang === 'de' ? 'de-CH' : 'en-US';
+const formatDate = (date: Date) =>
+	date.toLocaleDateString(dateLocale, { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<div class="stack gap-20">
+	<main class="wrapper stack gap-8">
+		<Hero title={t('nav.blog')} tagline={t('blog.tagline')} align="start" />
+		<ul class="post-list">
+			{
+				posts.map((post) => (
+					<li>
+						<a href={toLocalePath(`/blog/${slugOf(post.id)}/`, lang)} class="post-link">
+							<h2 class="post-title">{post.data.title}</h2>
+							<p class="post-date">{formatDate(post.data.publishDate)}</p>
+							<p class="post-description">{post.data.description}</p>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</main>
+</div>
+
+<style>
+	.post-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.post-link {
+		display: block;
+		text-decoration: none;
+		padding: 1.5rem;
+		border: 1px solid var(--gray-800);
+		border-radius: 1rem;
+		background: var(--gradient-subtle);
+		box-shadow: var(--shadow-sm);
+		transition:
+			border-color var(--theme-transition),
+			box-shadow var(--theme-transition);
+	}
+
+	.post-link:hover,
+	.post-link:focus {
+		border-color: var(--accent-regular);
+		box-shadow: var(--shadow-md);
+	}
+
+	.post-title {
+		font-size: var(--text-xl);
+		color: var(--gray-0);
+		margin: 0 0 0.25rem;
+	}
+
+	.post-date {
+		font-size: var(--text-sm);
+		color: var(--gray-400);
+		margin: 0 0 0.75rem;
+	}
+
+	.post-description {
+		font-size: var(--text-md);
+		color: var(--gray-300);
+		margin: 0;
+	}
+</style>

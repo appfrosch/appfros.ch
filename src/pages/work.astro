@@ -1,37 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-import ContactCTA from '../components/ContactCTA.astro';
-import Grid from '../components/Grid.astro';
-import Hero from '../components/Hero.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkIndexBody from '../components/pages/WorkIndexBody.astro';
+import { useTranslations } from '../i18n/ui';
 
-const projects = (await getCollection('work'))
-	.filter((project) => !project.data.draft)
-	.sort((a, b) => a.data.title.localeCompare(b.data.title));
+const t = useTranslations('en');
 ---
 
-<BaseLayout
-	title="Apps | Appfrosch"
-	description="Learn about my most recent projects"
->
-	<div class="stack gap-20">
-		<main class="wrapper stack gap-8">
-			<Hero
-				title="Apps"
-				tagline="These are the projects I am currently working on."
-				align="start"
-			/>
-			<Grid variant="offset">
-				{
-					projects.map((project) => (
-						<li>
-							<PortfolioPreview project={project} />
-						</li>
-					))
-				}
-			</Grid>
-		</main>
-		<!-- <ContactCTA /> -->
-	</div>
+<BaseLayout title={`${t('nav.apps')} | Appfrosch`} description={t('work.metaDescription')} lang="en">
+	<WorkIndexBody lang="en" />
 </BaseLayout>

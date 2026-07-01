@@ -19,6 +19,15 @@ function rehypeCleanHeadingIds() {
 
 // https://astro.build/config
 export default defineConfig({
+	// Path-based i18n: English at `/`, German under `/de/`. Pages live in `src/pages`
+	// (en) and `src/pages/de` (de); see src/i18n/ui.ts for the shared helpers.
+	i18n: {
+		locales: ['en', 'de'],
+		defaultLocale: 'en',
+		routing: {
+			prefixDefaultLocale: false,
+		},
+	},
 	markdown: {
 		rehypePlugins: [
 			rehypeSlug,

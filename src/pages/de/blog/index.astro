@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogIndexBody from '../../../components/pages/BlogIndexBody.astro';
+import { useTranslations } from '../../../i18n/ui';
+
+const t = useTranslations('de');
+---
+
+<BaseLayout title={`${t('nav.blog')} | Appfrosch`} description={t('blog.metaDescription')} lang="de">
+	<BlogIndexBody lang="de" />
+</BaseLayout>

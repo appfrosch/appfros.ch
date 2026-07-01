@@ -6,24 +6,29 @@ import Footer from '../components/Footer.astro';
 // Component Imports
 import MainHead from '../components/MainHead.astro';
 import Nav from '../components/Nav.astro';
+import { getLangFromUrl, type Lang } from '../i18n/ui';
 
 interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
+	lang?: Lang;
 }
 
 const { title, description } = Astro.props;
+// Locale is derived from the URL so every page gets the right <html lang> automatically,
+// but it can be overridden via the `lang` prop where a page knows its locale up front.
+const lang: Lang = Astro.props.lang ?? getLangFromUrl(Astro.url);
 ---
 
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<MainHead title={title} description={description} />
 	</head>
 	<body>
 		<div class="stack backgrounds">
-			<Nav />
+			<Nav lang={lang} />
 			<slot />
-			<Footer />
+			<Footer lang={lang} />
 		</div>
 
 		<script>

@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Grid from '../Grid.astro';
+import Hero from '../Hero.astro';
+import PortfolioPreview from '../PortfolioPreview.astro';
+import { localeOf, useTranslations, type Lang } from '../../i18n/ui';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const projects = (await getCollection('work'))
+	.filter((project) => localeOf(project.id) === lang && !project.data.draft)
+	.sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<div class="stack gap-20">
+	<main class="wrapper stack gap-8">
+		<Hero title={t('nav.apps')} tagline={t('work.tagline')} align="start" />
+		<Grid variant="offset">
+			{
+				projects.map((project) => (
+					<li>
+						<PortfolioPreview project={project} lang={lang} />
+					</li>
+				))
+			}
+		</Grid>
+	</main>
+</div>

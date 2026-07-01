@@ -1,14 +1,18 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { slugOf, toLocalePath, type Lang } from '../i18n/ui';
 
 interface Props {
 	project: CollectionEntry<'work'>;
+	lang?: Lang;
 }
 
-const { data, id } = Astro.props.project;
+const { project, lang = 'en' } = Astro.props;
+const { data, id } = project;
+const href = toLocalePath(`/work/${slugOf(id)}`, lang);
 ---
 
-<a class="card" href={`/work/${id}`}>
+<a class="card" href={href}>
 	<img src={data.img} alt={data.img_alt || ''} loading="lazy" decoding="async" />
 	<div class="content">
 		<span class="title">{data.title}</span>

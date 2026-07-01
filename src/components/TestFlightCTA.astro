@@ -3,28 +3,86 @@
 // We collect interested testers' emails (we reach out with invites) rather than letting
 // people self-enroll. The form posts straight to Supabase (insert-only RLS), so no server
 // is needed.
+//
+// Visible copy and the client-side status messages are localized here. The messages used
+// by the inline client script are passed via data-* attributes, since that script is
+// bundled separately and can't read these frontmatter variables directly.
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+	lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const copy = {
+	en: {
+		badge: '🧪 Now in beta',
+		title: 'RoadTrippin is in beta testing',
+		lead: "The app isn't on the App Store or Google Play yet — it's being tested through Apple TestFlight and Google Play testing. Want to help test it? Leave your email and we'll reach out with an invite.",
+		legend: 'Which beta(s) are you interested in?',
+		android: 'Android (Play testing)',
+		emailLabel: 'Your email',
+		placeholder: 'you@example.com',
+		submit: 'Notify me',
+		invalid: 'Please enter a valid email address.',
+		platform: 'Please choose at least one platform — iOS, Android, or both.',
+		unconfigured: "Signups aren't configured yet — please email splash@appfros.ch.",
+		saving: 'Saving…',
+		ok: "You're on the list — we'll be in touch. Thanks! 🎉",
+		dupe: "You're already on the list — sit tight! 🙌",
+		error: 'Something went wrong. Please try again, or email splash@appfros.ch.',
+		network: 'Network error. Please check your connection and try again.',
+	},
+	de: {
+		badge: '🧪 Jetzt in der Beta',
+		title: 'RoadTrippin ist in der Beta-Testphase',
+		lead: 'Die App ist noch nicht im App Store oder bei Google Play — sie wird über Apple TestFlight und Google-Play-Tests getestet. Möchtest du mittesten? Hinterlass deine E-Mail und wir melden uns mit einer Einladung.',
+		legend: 'Für welche Beta(s) interessierst du dich?',
+		android: 'Android (Play-Test)',
+		emailLabel: 'Deine E-Mail',
+		placeholder: 'du@beispiel.ch',
+		submit: 'Benachrichtige mich',
+		invalid: 'Bitte gib eine gültige E-Mail-Adresse ein.',
+		platform: 'Bitte wähle mindestens eine Plattform — iOS, Android oder beide.',
+		unconfigured: 'Die Anmeldung ist noch nicht eingerichtet — bitte schreib an splash@appfros.ch.',
+		saving: 'Wird gespeichert …',
+		ok: 'Du bist auf der Liste — wir melden uns. Danke! 🎉',
+		dupe: 'Du bist bereits auf der Liste — bleib dran! 🙌',
+		error: 'Etwas ist schiefgelaufen. Bitte versuch es erneut oder schreib an splash@appfros.ch.',
+		network: 'Netzwerkfehler. Bitte überprüfe deine Verbindung und versuch es erneut.',
+	},
+}[lang];
 ---
 
 <section class="beta-cta" aria-labelledby="beta-cta-title">
-	<div class="badge">🧪 Now in beta</div>
-	<h2 id="beta-cta-title">RoadTrippin is in beta testing</h2>
-	<p class="lead">
-		The app isn't on the App Store or Google Play yet — it's being tested through
-		Apple TestFlight and Google Play testing. Want to help test it? Leave your email
-		and we'll reach out with an invite.
-	</p>
+	<div class="badge">{copy.badge}</div>
+	<h2 id="beta-cta-title">{copy.title}</h2>
+	<p class="lead">{copy.lead}</p>
 
-	<form class="signup" id="beta-signup" novalidate>
+	<form
+		class="signup"
+		id="beta-signup"
+		novalidate
+		data-msg-invalid={copy.invalid}
+		data-msg-platform={copy.platform}
+		data-msg-unconfigured={copy.unconfigured}
+		data-msg-saving={copy.saving}
+		data-msg-ok={copy.ok}
+		data-msg-dupe={copy.dupe}
+		data-msg-error={copy.error}
+		data-msg-network={copy.network}
+	>
 		<fieldset class="platforms">
-			<legend class="field-label">Which beta(s) are you interested in?</legend>
+			<legend class="field-label">{copy.legend}</legend>
 			<label class="check">
 				<input type="checkbox" id="want-ios" name="ios" /> iOS (TestFlight)
 			</label>
 			<label class="check">
-				<input type="checkbox" id="want-android" name="android" /> Android (Play testing)
+				<input type="checkbox" id="want-android" name="android" /> {copy.android}
 			</label>
 		</fieldset>
-		<label class="field-label" for="beta-email">Your email</label>
+		<label class="field-label" for="beta-email">{copy.emailLabel}</label>
 		<div class="row">
 			<input
 				type="email"
@@ -32,10 +90,10 @@
 				name="email"
 				inputmode="email"
 				autocomplete="email"
-				placeholder="you@example.com"
+				placeholder={copy.placeholder}
 				required
 			/>
-			<button type="submit" id="beta-submit">Notify me</button>
+			<button type="submit" id="beta-submit">{copy.submit}</button>
 		</div>
 		<p class="form-status" id="beta-status" role="status" aria-live="polite"></p>
 	</form>
@@ -52,6 +110,9 @@
 	const button = document.getElementById('beta-submit') as HTMLButtonElement | null;
 	const status = document.getElementById('beta-status');
 
+	// Localized status messages are provided by the server-rendered form via data-* attributes.
+	const msg = (name: string, fallback: string) => form?.dataset[name] ?? fallback;
+
 	function setStatus(message: string, kind: 'ok' | 'error' | '') {
 		if (!status) return;
 		status.textContent = message;
@@ -64,7 +125,7 @@
 
 		const email = input.value.trim();
 		if (!email || !input.checkValidity()) {
-			setStatus('Please enter a valid email address.', 'error');
+			setStatus(msg('msgInvalid', 'Please enter a valid email address.'), 'error');
 			input.focus();
 			return;
 		}
@@ -72,17 +133,17 @@
 		const wantsIos = !!iosBox?.checked;
 		const wantsAndroid = !!androidBox?.checked;
 		if (!wantsIos && !wantsAndroid) {
-			setStatus('Please choose at least one platform — iOS, Android, or both.', 'error');
+			setStatus(msg('msgPlatform', 'Please choose at least one platform — iOS, Android, or both.'), 'error');
 			return;
 		}
 
 		if (!url || !key) {
-			setStatus("Signups aren't configured yet — please email splash@appfros.ch.", 'error');
+			setStatus(msg('msgUnconfigured', "Signups aren't configured yet — please email splash@appfros.ch."), 'error');
 			return;
 		}
 
 		button.disabled = true;
-		setStatus('Saving…', '');
+		setStatus(msg('msgSaving', 'Saving…'), '');
 
 		try {
 			const res = await fetch(`${url}/rest/v1/testflight_signups`, {
@@ -98,15 +159,15 @@
 
 			if (res.ok) {
 				form.reset();
-				setStatus("You're on the list — we'll be in touch. Thanks! 🎉", 'ok');
+				setStatus(msg('msgOk', "You're on the list — we'll be in touch. Thanks! 🎉"), 'ok');
 			} else if (res.status === 409) {
 				// Unique-index violation: this email is already signed up.
-				setStatus("You're already on the list — sit tight! 🙌", 'ok');
+				setStatus(msg('msgDupe', "You're already on the list — sit tight! 🙌"), 'ok');
 			} else {
-				setStatus('Something went wrong. Please try again, or email splash@appfros.ch.', 'error');
+				setStatus(msg('msgError', 'Something went wrong. Please try again, or email splash@appfros.ch.'), 'error');
 			}
 		} catch {
-			setStatus('Network error. Please check your connection and try again.', 'error');
+			setStatus(msg('msgNetwork', 'Network error. Please check your connection and try again.'), 'error');
 		} finally {
 			button.disabled = false;
 		}

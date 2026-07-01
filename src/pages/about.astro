@@ -1,76 +1,12 @@
 ---
-import { getEntry, render } from 'astro:content';
-
-import Hero from '../components/Hero.astro';
+import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutBody from '../components/pages/AboutBody.astro';
 
-const about = await getEntry('pages', 'about');
-const { Content } = await render(about);
-const { title, tagline, description } = about.data;
+const about = await getEntry('pages', 'en/about');
+const { title, description } = about!.data;
 ---
 
-<BaseLayout title={`${title} | Appfrosch`} description={description}>
-	<div class="stack gap-20">
-		<main class="wrapper about">
-			<Hero title={title} tagline={tagline} />
-			<div class="content">
-				<Content />
-			</div>
-		</main>
-	</div>
+<BaseLayout title={`${title} | Appfrosch`} description={description} lang="en">
+	<AboutBody lang="en" />
 </BaseLayout>
-
-<style>
-	.about {
-		display: flex;
-		flex-direction: column;
-		gap: 3.5rem;
-	}
-
-	.content {
-		max-width: 65ch;
-		margin-inline: auto;
-		color: var(--gray-200);
-	}
-
-	.content > :global(* + *) {
-		margin-top: 1rem;
-	}
-
-	.content :global(h2) {
-		position: relative;
-		margin: 1.5rem 0 0.5rem;
-		font-size: var(--text-xl);
-		color: var(--gray-0);
-	}
-
-	.content :global(.anchor-link) {
-		opacity: 0;
-		margin-left: 0.4em;
-		font-size: 0.85em;
-		text-decoration: none;
-		color: var(--gray-400);
-		transition: opacity var(--theme-transition);
-	}
-
-	.content :global(h2:hover .anchor-link) {
-		opacity: 1;
-	}
-
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
-
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
-	}
-
-	@media (min-width: 50em) {
-		.content {
-			font-size: var(--text-lg);
-		}
-	}
-</style>

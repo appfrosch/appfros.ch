@@ -2,14 +2,27 @@
 import Icon from './Icon.astro';
 import type { iconPaths } from './IconPaths';
 import ThemeToggle from './ThemeToggle.astro';
+import { useTranslations, toLocalePath, type Lang, type UIKey } from '../i18n/ui';
 
-/** Main menu items */
-const textLinks: { label: string; href: string }[] = [
-	{ label: 'Home', href: '/' },
-	{ label: 'Apps', href: '/work/' },
-	{ label: 'Blog', href: '/blog/' },
-	{ label: 'About', href: '/about/' },
+interface Props {
+	lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = useTranslations(lang);
+
+/** Main menu items. `base` is the locale-independent path; `href` is localized for rendering. */
+const baseLinks: { key: UIKey; base: string }[] = [
+	{ key: 'nav.home', base: '/' },
+	{ key: 'nav.apps', base: '/work/' },
+	{ key: 'nav.blog', base: '/blog/' },
+	{ key: 'nav.about', base: '/about/' },
 ];
+const textLinks = baseLinks.map(({ key, base }) => ({
+	label: t(key),
+	href: toLocalePath(base, lang),
+	base,
+}));
 
 /** Icon links to social media — edit these with links to your profiles! */
 const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
@@ -17,12 +30,19 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
 	{ label: 'Mastodon', href: 'https://iosdev.space/@appfrosch', icon: 'mastodon-logo' },
 ];
 
-/** Test if a link is pointing to the current page. */
-const isCurrentPage = (href: string) => {
-	let pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+/** The "other" locale and the current page's URL within it, for the language switcher. */
+const otherLang: Lang = lang === 'de' ? 'en' : 'de';
+const switchHref = toLocalePath(Astro.url.pathname, otherLang);
+const switchLabel = otherLang.toUpperCase();
+
+/** Test if a link's locale-independent base matches the current (locale-stripped) page. */
+const isCurrentPage = (base: string) => {
+	// Strip the locale prefix first, while the leading slash is still intact, then the base path.
+	let pathname = Astro.url.pathname.replace(/^\/de(?=\/|$)/, '') || '/';
+	pathname = pathname.replace(import.meta.env.BASE_URL, '');
 	if (pathname.at(0) !== '/') pathname = '/' + pathname;
 	if (pathname.at(-1) !== '/') pathname += '/';
-	return pathname === href || (href !== '/' && pathname.startsWith(href));
+	return pathname === base || (base !== '/' && pathname.startsWith(base));
 };
 ---
 
@@ -44,9 +64,9 @@ const isCurrentPage = (href: string) => {
 	<noscript>
 		<ul class="nav-items">
 			{
-				textLinks.map(({ label, href }) => (
+				textLinks.map(({ label, href, base }) => (
 					<li>
-						<a aria-current={isCurrentPage(href) ? 'page' : null} class="link" href={href}>
+						<a aria-current={isCurrentPage(base) ? 'page' : null} class="link" href={href}>
 							{label}
 						</a>
 					</li>
@@ -71,9 +91,9 @@ const isCurrentPage = (href: string) => {
 	<div id="menu-content" hidden>
 		<ul class="nav-items">
 			{
-				textLinks.map(({ label, href }) => (
+				textLinks.map(({ label, href, base }) => (
 					<li>
-						<a aria-current={isCurrentPage(href) ? 'page' : null} class="link" href={href}>
+						<a aria-current={isCurrentPage(base) ? 'page' : null} class="link" href={href}>
 							{label}
 						</a>
 					</li>
@@ -91,6 +111,11 @@ const isCurrentPage = (href: string) => {
 					))
 				}
 			</div>
+
+			<a class="lang-switch" href={switchHref} hreflang={otherLang} title={t('nav.switchTo')}>
+				<span class="sr-only">{t('nav.switchTo')}</span>
+				<span aria-hidden="true">{switchLabel}</span>
+			</a>
 
 			<div class="theme-toggle">
 				<ThemeToggle />
@@ -259,6 +284,29 @@ const isCurrentPage = (href: string) => {
 		display: flex;
 		align-items: center;
 		height: calc(var(--icon-size) + 2 * var(--icon-padding));
+	}
+
+	.lang-switch {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 2.25rem;
+		height: calc(var(--icon-size) + 2 * var(--icon-padding));
+		padding: 0 0.5rem;
+		font-size: var(--text-sm);
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		color: var(--accent-dark);
+		text-decoration: none;
+		border-radius: 999rem;
+		box-shadow: inset 0 0 0 1px var(--accent-overlay);
+		transition: color var(--theme-transition), background-color var(--theme-transition);
+	}
+
+	.lang-switch:hover,
+	.lang-switch:focus {
+		color: var(--accent-text-over);
+		background-color: var(--accent-regular);
 	}
 
 	@media (min-width: 50em) {

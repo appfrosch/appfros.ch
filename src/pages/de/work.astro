@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkIndexBody from '../../components/pages/WorkIndexBody.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const t = useTranslations('de');
+---
+
+<BaseLayout title={`${t('nav.apps')} | Appfrosch`} description={t('work.metaDescription')} lang="de">
+	<WorkIndexBody lang="de" />
+</BaseLayout>
