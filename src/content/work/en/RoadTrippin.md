@@ -12,6 +12,7 @@ tags:
   - Android
   - travel
 beta: true
+mastodon: https://indieapps.space/@roadtrippin
 ---
 
 ### About the app
