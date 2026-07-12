@@ -14,6 +14,9 @@ export const collections = {
 			draft: z.boolean().default(false),
 			// Beta-testing CTA (renders the TestFlight alert + email signup at the top of the page).
 			beta: z.boolean().default(false),
+			// Fediverse profile URL for this app. When set, the page renders a rel="me" back-link
+			// so Mastodon (and other AP servers) can verify the link on the profile.
+			mastodon: z.string().url().optional(),
 		}),
 	}),
 	blog: defineCollection({

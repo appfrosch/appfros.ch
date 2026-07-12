@@ -14,6 +14,15 @@ interface Props {
 const { entry, lang } = Astro.props;
 const t = useTranslations(lang);
 const { Content } = await render(entry);
+
+// Fediverse handle for the rel="me" verification link, derived from the profile URL
+// (e.g. https://indieapps.space/@roadtrippin → @roadtrippin@indieapps.space).
+const mastodon = entry.data.mastodon;
+let mastodonHandle = '';
+if (mastodon) {
+	const { host, pathname } = new URL(mastodon);
+	mastodonHandle = `${pathname.replace(/^\/@?/, '@')}@${host}`;
+}
 ---
 
 <div class="stack gap-20">
@@ -40,6 +49,13 @@ const { Content } = await render(entry);
 				<div class="content">
 					<Content />
 				</div>
+				{mastodon && (
+					<p class="mastodon-verify">
+						<a rel="me" href={mastodon}>
+							<Icon icon="mastodon-logo" size="1.1em" /> {mastodonHandle}
+						</a>
+					</p>
+				)}
 			</div>
 		</main>
 	</div>
@@ -72,6 +88,26 @@ const { Content } = await render(entry);
 	.description {
 		font-size: var(--text-lg);
 		max-width: 54ch;
+	}
+
+	.mastodon-verify {
+		max-width: 65ch;
+		margin-inline: auto;
+		font-size: var(--text-sm);
+	}
+
+	.mastodon-verify a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4em;
+		color: var(--gray-400);
+		text-decoration: none;
+		transition: color var(--theme-transition);
+	}
+
+	.mastodon-verify a:hover,
+	.mastodon-verify a:focus {
+		color: var(--accent-dark);
 	}
 
 	.content {
