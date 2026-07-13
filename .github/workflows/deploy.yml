@@ -4,31 +4,38 @@ on:
   push:
     branches: [ main ]
 
+# Least-privilege token: this workflow only reads the repo to build it, and deploys
+# over SSH (not via the GitHub API), so it needs no write scopes.
+permissions:
+  contents: read
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
+    # Third-party actions are pinned to a commit SHA (supply-chain hardening); the
+    # trailing comment records the human-readable version each SHA corresponds to.
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
       with:
         node-version: '18'
-        
+
     - name: Install dependencies
       run: npm ci
-      
+
     - name: Build Astro site
       run: npm run build
       env:
         # Public Supabase config for the beta-signup form (see .env.example).
-        # Safe to expose: publishable key against an insert-only table.
+        # Safe to expose: publishable key against an insert-only (RLS-enforced) table.
         PUBLIC_SUPABASE_URL: ${{ vars.PUBLIC_SUPABASE_URL }}
         PUBLIC_SUPABASE_ANON_KEY: ${{ vars.PUBLIC_SUPABASE_ANON_KEY }}
-      
+
     - name: Setup SSH
-      uses: webfactory/ssh-agent@v0.8.0
+      uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
         
