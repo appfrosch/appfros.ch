@@ -4,19 +4,21 @@ import Hero from '../Hero.astro';
 import type { Lang } from '../../i18n/ui';
 
 interface Props {
+	/** Entry name in the `pages` collection, without the locale folder (e.g. `about`). */
+	page: string;
 	lang: Lang;
 }
 
-const { lang } = Astro.props;
-const about = await getEntry('pages', `${lang}/about`);
-if (!about) throw new Error(`Missing about page for locale "${lang}"`);
-const { Content } = await render(about);
-const { tagline } = about.data;
+const { page, lang } = Astro.props;
+const entry = await getEntry('pages', `${lang}/${page}`);
+if (!entry) throw new Error(`Missing "${page}" page for locale "${lang}"`);
+const { Content } = await render(entry);
+const { tagline } = entry.data;
 ---
 
 <div class="stack gap-20">
-	<main class="wrapper about">
-		<Hero title={about.data.title} tagline={tagline} />
+	<main class="wrapper page">
+		<Hero title={entry.data.title} tagline={tagline} />
 		<div class="content">
 			<Content />
 		</div>
@@ -24,7 +26,7 @@ const { tagline } = about.data;
 </div>
 
 <style>
-	.about {
+	.page {
 		display: flex;
 		flex-direction: column;
 		gap: 3.5rem;

@@ -1,12 +1,12 @@
 ---
 import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import AboutBody from '../components/pages/AboutBody.astro';
+import PageBody from '../components/pages/PageBody.astro';
 
 const about = await getEntry('pages', 'en/about');
 const { title, description } = about!.data;
 ---
 
 <BaseLayout title={`${title} | Appfrosch`} description={description} lang="en">
-	<AboutBody lang="en" />
+	<PageBody page="about" lang="en" />
 </BaseLayout>
