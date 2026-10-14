@@ -46,6 +46,7 @@ export const ui = {
 		'notFound.metaDescription': '404 Error — this page was not found',
 
 		'footer.builtWith': 'Designed & Developed with',
+		'footer.privacy': 'Privacy Policy',
 	},
 	de: {
 		'nav.home': 'Start',
@@ -76,6 +77,7 @@ export const ui = {
 		'notFound.metaDescription': '404-Fehler — diese Seite wurde nicht gefunden',
 
 		'footer.builtWith': 'Gestaltet & entwickelt mit',
+		'footer.privacy': 'Datenschutz',
 	},
 } as const;
 

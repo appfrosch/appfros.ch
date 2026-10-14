@@ -1,0 +1,12 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageBody from '../components/pages/PageBody.astro';
+
+const privacy = await getEntry('pages', 'en/privacy');
+const { title, description } = privacy!.data;
+---
+
+<BaseLayout title={`${title} | Appfrosch`} description={description} lang="en">
+	<PageBody page="privacy" lang="en" />
+</BaseLayout>
