@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 export const collections = {
@@ -16,7 +17,7 @@ export const collections = {
 			beta: z.boolean().default(false),
 			// Fediverse profile URL for this app. When set, the page renders a rel="me" back-link
 			// so Mastodon (and other AP servers) can verify the link on the profile.
-			mastodon: z.string().url().optional(),
+			mastodon: z.url().optional(),
 		}),
 	}),
 	blog: defineCollection({
