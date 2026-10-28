@@ -8,6 +8,7 @@ This policy applies to the following apps by Appfrosch (Andreas Seeger):
 
 - **[nash](/work/nash/)** (macOS)
 - **[App-etizer](/work/app-etizer/)** (iOS, macOS)
+- **[WhosCookin](/work/whoscookin/)** (iOS)
 
 If an app is not listed here, it has its own privacy policy on its page.
 

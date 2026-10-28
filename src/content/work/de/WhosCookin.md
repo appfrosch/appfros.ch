@@ -26,3 +26,11 @@ Genau dafür habe ich WhosCookin gestartet.
 Wir nutzen die App nun seit fast einem halben Jahr für die Menüplanung unserer Familie. Sie ist nicht perfekt und hat noch ein paar Bugs, aber insgesamt bin ich bisher sehr zufrieden damit.
 
 Der nächste Schritt ist, diese Bugs zu beheben und die App für TestFlight und anschliessend für den Store fit zu machen.
+
+### Datenschutz
+
+WhosCookin synchronisiert über dein eigenes iCloud-Konto — es gibt kein Konto, keinen Server und kein Tracking. Siehe [Datenschutzerklärung](/de/privacy/).
+
+### Kontakt
+
+Fragen oder Feedback? Erreiche mich unter: splash@appfros.ch

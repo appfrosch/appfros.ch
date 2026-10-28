@@ -8,6 +8,7 @@ Diese Datenschutzerklärung gilt für folgende Apps von Appfrosch (Andreas Seege
 
 - **[nash](/de/work/nash/)** (macOS)
 - **[App-etizer](/de/work/app-etizer/)** (iOS, macOS)
+- **[WhosCookin](/de/work/whoscookin/)** (iOS)
 
 Apps, die hier nicht aufgeführt sind, haben eine eigene Datenschutzerklärung auf ihrer Seite.
 
