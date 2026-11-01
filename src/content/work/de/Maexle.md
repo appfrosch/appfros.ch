@@ -51,18 +51,8 @@ Optionale Regeln lassen sich in den Einstellungen aktivieren:
 • Gleicher Wert erlaubt – denselben Wert wie der vorherige Spieler anzusagen ist erlaubt.
 • 31 dreht die Richtung – die Ansage 31 kehrt die Spielreihenfolge um.
 
-### 🛡️ Datenschutzerklärung
-Zuletzt aktualisiert: April 2026
-
-#### 🚫 Datenerhebung
-Mäxle! erhebt keinerlei personenbezogene Daten – weder direkt noch über SDKs von Drittanbietern. Keine Analyse, kein Tracking, keine Werbe-IDs.
-
-#### 📢 Werbung
-Die kostenlose Version von Mäxle! zeigt Werbung über [Billboard](https://github.com/hiddevdploeg/Billboard), ein datenschutzfreundliches Werbe-Framework für Indie-Apps, das weder Tracking noch Cookies verwendet. Der Kauf eines beliebigen In-App-Produkts entfernt die Werbung vollständig.
-In-App-Käufe
-Alle Käufe werden von Apple abgewickelt. Ich erhalte oder speichere deine Zahlungsinformationen nicht.
-Spieldaten
-Spielernamen und Einstellungen werden ausschliesslich lokal auf deinem Gerät gespeichert und niemals irgendwohin übertragen.
+### 🛡️ Datenschutz
+Mäxle! erhebt keine personenbezogenen Daten. Die kostenlose Version zeigt kleine Werbebanner über Billboard, ohne Tracking; jeder In-App-Kauf entfernt sie. Spielernamen und Einstellungen bleiben auf deinem Gerät. Siehe [Datenschutzerklärung](/de/privacy/).
 
 ### ✉️ Kontakt
 Fragen? Erreich mich unter: splash@appfros.ch
