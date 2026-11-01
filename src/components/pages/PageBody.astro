@@ -49,6 +49,30 @@ const { tagline } = entry.data;
 		color: var(--gray-0);
 	}
 
+	.content :global(h3) {
+		position: relative;
+		margin: 1.25rem 0 0.25rem;
+		font-size: var(--text-lg);
+		color: var(--gray-0);
+	}
+
+	.content :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	.content :global(th),
+	.content :global(td) {
+		padding: 0.5rem 1.25rem 0.5rem 0;
+		text-align: left;
+		vertical-align: top;
+		border-bottom: 1px solid var(--gray-800);
+	}
+
+	.content :global(th) {
+		color: var(--gray-0);
+	}
+
 	.content :global(.anchor-link) {
 		opacity: 0;
 		margin-left: 0.4em;
@@ -58,7 +82,8 @@ const { tagline } = entry.data;
 		transition: opacity var(--theme-transition);
 	}
 
-	.content :global(h2:hover .anchor-link) {
+	.content :global(h2:hover .anchor-link),
+	.content :global(h3:hover .anchor-link) {
 		opacity: 1;
 	}
 
