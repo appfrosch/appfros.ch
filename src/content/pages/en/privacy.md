@@ -6,18 +6,38 @@ description: Privacy policy for the apps by Appfrosch.
 
 This policy applies to the following apps by Appfrosch (Andreas Seeger):
 
-- **[nash](/work/nash/)** (macOS)
-- **[App-etizer](/work/app-etizer/)** (iOS, macOS)
+| App | Platform | Ads |
+| --- | --- | --- |
+| **[nash](/work/nash/)** | macOS | No |
+| **[App-etizer](/work/app-etizer/)** | iOS, macOS | No |
+| **[WhosCookin](/work/whoscookin/)** | iOS | Yes, see [Ads](#ads) |
+| **[Mäxle!](/work/maexle/)** | iOS | Yes, see [Ads](#ads) |
 
 If an app is not listed here, it has its own privacy policy on its page.
 
 ## In short
 
-These apps do not collect any data about you. There is no tracking, no analytics, no advertising and no account. Nothing you create in the apps is sent to me.
+These apps do not collect any personal data about you. There is no tracking, no analytics and no account. Nothing you create in the apps is sent to me. The apps marked with ads above show small banners for other apps, without knowing who you are.
 
-## Your documents and settings
+## Your data
 
-Everything you create in these apps stays on your device. Where an app syncs between your devices (App-etizer), it does so through **your own iCloud account**. I have no access to that data; Apple's [privacy policy](https://www.apple.com/legal/privacy/) applies to iCloud.
+Everything you create in these apps (documents, names, meals, plans, game settings and so on) stays on your device. Where an app syncs between your devices (App-etizer, WhosCookin), it does so through **your own iCloud account**. I have no access to that data; Apple's [privacy policy](https://www.apple.com/legal/privacy/) applies to iCloud.
+
+## Ads
+
+This section applies only to the apps marked with ads above. The ads are small banners for other apps. They never receive what you create in the app, and they do not track you or your device across apps or websites. Each of these apps uses one of the following ad services.
+
+### Kickstart Exchange (WhosCookin)
+
+[Kickstart Exchange](https://exchange.kickstart.tools) matches apps, not people. To choose and count an ad, it receives only app-level details: which app shows the banner, its version, the platform and the App Store country. It also checks with Apple that the app is a genuine install, without keeping anything that identifies you or your device. Records of which ads were shown or tapped are kept for about 30 days and do not identify individual users. Details are in the [Kickstart Exchange privacy notice](https://exchange.kickstart.tools/privacy).
+
+### Billboard (Mäxle!)
+
+[Billboard](https://github.com/hiddevdploeg/Billboard) downloads a public list of ads and the advertised apps' icons from Apple. It sends nothing about you or your device, and uses no tracking and no cookies.
+
+### Removing ads
+
+In WhosCookin, WhosCookin Plus removes the ads. In Mäxle!, any in-app purchase removes them. Purchases are handled entirely by Apple; I never see your payment details.
 
 ## TestFlight and the App Store
 
@@ -25,10 +45,10 @@ When you install an app through TestFlight or the App Store, Apple handles the d
 
 ## Changes to this policy
 
-If an app ever needs more than described here (for example a network service, an account or a third-party SDK), it gets its own privacy policy instead of a change to this one. Any other change to this page is reflected in the date below.
+When an app starts showing ads or switches to a different ad service, this page is updated before that app update ships. Any change to this page is reflected in the date below.
 
 ## Contact
 
 Questions about privacy: [splash@appfros.ch](mailto:splash@appfros.ch)
 
-*Last updated: October 14, 2026*
+*Last updated: November 1, 2026*

@@ -51,18 +51,8 @@ Optional rules can be toggled in Settings:
 • Same Value Allowed — announcing the same value as the previous player is permitted.
 • 31 Reverses Direction — announcing 31 reverses the turn order.
 
-### 🛡️ Privacy Policy
-Last updated: April 2026
-
-#### 🚫 Data collection
-! does not collect any personal data — neither directly nor through third-party SDKs. No analytics, no tracking, no advertising identifiers.
-
-#### 📢 Ads
-The free version of Mäxle! displays ads via [Billboard](https://github.com/hiddevdploeg/Billboard), a privacy-friendly ad framework for indie apps that does not use tracking or cookies. Purchasing any in-app product removes ads entirely.
-In-App Purchases
-All purchases are processed by Apple. I do not receive or store your payment information.
-Game data
-Player names and settings are stored locally on your device only and are never transmitted anywhere.
+### 🛡️ Privacy
+Mäxle! collects no personal data. The free version shows small ad banners through Billboard, without tracking; any in-app purchase removes them. Player names and settings stay on your device. See the [privacy policy](/privacy/).
 
 ### ✉️ Contact
 Questions? Reach me at: splash@appfros.ch
