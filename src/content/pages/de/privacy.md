@@ -14,11 +14,15 @@ Apps, die hier nicht aufgeführt sind, haben eine eigene Datenschutzerklärung a
 
 ## Kurz gesagt
 
-Diese Apps sammeln keine Daten über dich. Es gibt kein Tracking, keine Analyse, keine Werbung und kein Konto. Nichts, was du in den Apps erstellst, wird an mich übermittelt.
+Diese Apps sammeln keine Daten über dich. Es gibt kein Tracking, keine Analyse und kein Konto. Nichts, was du in den Apps erstellst, wird an mich übermittelt. Die einzige Ausnahme bei "keine Werbung" ist das Werbebanner in WhosCookin, siehe unten.
 
 ## Deine Dokumente und Einstellungen
 
-Alles, was du in diesen Apps erstellst, bleibt auf deinem Gerät. Wo eine App zwischen deinen Geräten synchronisiert (App-etizer), geschieht das über **dein eigenes iCloud-Konto**. Ich habe keinen Zugriff auf diese Daten; für iCloud gilt die [Datenschutzrichtlinie von Apple](https://www.apple.com/legal/privacy/de-ww/).
+Alles, was du in diesen Apps erstellst, bleibt auf deinem Gerät. Wo eine App zwischen deinen Geräten synchronisiert (App-etizer, WhosCookin), geschieht das über **dein eigenes iCloud-Konto**. Ich habe keinen Zugriff auf diese Daten; für iCloud gilt die [Datenschutzrichtlinie von Apple](https://www.apple.com/legal/privacy/de-ww/).
+
+## Werbung in WhosCookin
+
+WhosCookin zeigt ein kleines Banner für andere Apps über [Kickstart Exchange](https://exchange.kickstart.tools), bis du WhosCookin Plus kaufst. Das Banner erhält nur Angaben zur App (etwa die App-Version und das App-Store-Land), nie deine Namen, Gerichte oder Pläne, und es verfolgt weder dich noch dein Gerät. Einzelheiten stehen in der [Datenschutzerklärung von Kickstart Exchange](https://exchange.kickstart.tools/privacy).
 
 ## TestFlight und App Store
 
@@ -32,4 +36,4 @@ Braucht eine App einmal mehr als hier beschrieben (zum Beispiel einen Netzwerkdi
 
 Fragen zum Datenschutz: [splash@appfros.ch](mailto:splash@appfros.ch)
 
-*Zuletzt aktualisiert: 14. Oktober 2026*
+*Zuletzt aktualisiert: 1. November 2026*
