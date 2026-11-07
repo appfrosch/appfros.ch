@@ -31,19 +31,15 @@ Besides what you write, the draft contains technical details: the app version, y
 
 ## Ads
 
-This section applies only to the apps marked with ads above. The ads are small banners for other apps. They never receive what you create in the app, and they do not track you or your device across apps or websites. Each of these apps uses one of the following ad services.
+This section applies only to the apps marked with ads above. The ads are small banners for other apps. They never receive what you create in the app, and they do not track you or your device across apps or websites. They are served by Kickstart Exchange.
 
-### Kickstart Exchange (WhosCookin)
+### Kickstart Exchange (WhosCookin, Mäxle!)
 
 [Kickstart Exchange](https://exchange.kickstart.tools) matches apps, not people. To choose and count an ad, it receives only app-level details: which app shows the banner, its version, the platform and the App Store country. It also checks with Apple that the app is a genuine install, without keeping anything that identifies you or your device. Records of which ads were shown or tapped are kept for about 30 days and do not identify individual users. Details are in the [Kickstart Exchange privacy notice](https://exchange.kickstart.tools/privacy).
 
-### Billboard (Mäxle!)
-
-[Billboard](https://github.com/hiddevdploeg/Billboard) downloads a public list of ads and the advertised apps' icons from Apple. It sends nothing about you or your device, and uses no tracking and no cookies.
-
 ### Removing ads
 
-In WhosCookin, WhosCookin Plus removes the ads. In Mäxle!, any in-app purchase removes them. Purchases are handled entirely by Apple; I never see your payment details.
+In WhosCookin, WhosCookin Plus removes the ads. In Mäxle!, unlocking all four rule variants, one by one or as a bundle, removes them. Purchases are handled entirely by Apple; I never see your payment details.
 
 ## TestFlight and the App Store
 

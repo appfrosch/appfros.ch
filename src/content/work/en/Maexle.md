@@ -52,7 +52,7 @@ Optional rules can be toggled in Settings:
 • 31 Reverses Direction — announcing 31 reverses the turn order.
 
 ### 🛡️ Privacy
-Mäxle! collects no personal data. The free version shows small ad banners through Billboard, without tracking; any in-app purchase removes them. Player names and settings stay on your device. See the [privacy policy](/privacy/).
+Mäxle! collects no personal data. The free version shows small ad banners through Kickstart Exchange, without tracking; unlocking all four rule variants removes them. Player names and settings stay on your device. See the [privacy policy](/privacy/).
 
 ### ✉️ Contact
 Questions? Reach me at: splash@appfros.ch
