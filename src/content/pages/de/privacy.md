@@ -17,11 +17,17 @@ Apps, die hier nicht aufgeführt sind, haben eine eigene Datenschutzerklärung a
 
 ## Kurz gesagt
 
-Diese Apps sammeln keine persönlichen Daten über dich. Es gibt kein Tracking, keine Analyse und kein Konto. Nichts, was du in den Apps erstellst, wird an mich übermittelt. Die oben mit Werbung markierten Apps zeigen kleine Banner für andere Apps, ohne zu wissen, wer du bist.
+Diese Apps sammeln keine persönlichen Daten über dich. Es gibt kein Tracking, keine Analyse und kein Konto. Nichts, was du in den Apps erstellst, wird an mich übermittelt, ausser du schickst mir selbst Feedback per E-Mail. Die oben mit Werbung markierten Apps zeigen kleine Banner für andere Apps, ohne zu wissen, wer du bist.
 
 ## Deine Daten
 
 Alles, was du in diesen Apps erstellst (Dokumente, Namen, Gerichte, Pläne, Spieleinstellungen und so weiter), bleibt auf deinem Gerät. Wo eine App zwischen deinen Geräten synchronisiert (App-etizer, WhosCookin), geschieht das über **dein eigenes iCloud-Konto**. Ich habe keinen Zugriff auf diese Daten; für iCloud gilt die [Datenschutzrichtlinie von Apple](https://www.apple.com/legal/privacy/de-ww/).
+
+## Feedback per E-Mail
+
+In WhosCookin kannst du mir per E-Mail einen Fehlerbericht, eine Idee oder anderes Feedback schicken (feedback@appfros.ch). Das geschieht nur, wenn du es willst: Die App öffnet einen Entwurf in deiner Mail-App, und du kannst ihn vor dem Senden lesen, ändern oder verwerfen.
+
+Neben deinem Text enthält der Entwurf technische Angaben: App-Version, Gerätemodell, iOS-Version und Sprache. Ein Fehlerbericht enthält zusätzlich zum Beispiel Region, Zeitzone, Textgrösse, freien Speicher, deinen iCloud-Status, die Anzahl deiner Haushalte, Personen und Gerichte sowie das App-Protokoll der letzten 24 Stunden. Namen oder Gerichte sind nicht dabei. Wie bei jeder E-Mail sehe ich auch deine E-Mail-Adresse. Ich verwende all das nur, um dir zu antworten und die App zu verbessern.
 
 ## Werbung
 
@@ -51,4 +57,4 @@ Beginnt eine App, Werbung zu zeigen, oder wechselt sie den Werbedienst, wird die
 
 Fragen zum Datenschutz: [splash@appfros.ch](mailto:splash@appfros.ch)
 
-*Zuletzt aktualisiert: 1. November 2026*
+*Zuletzt aktualisiert: 7. November 2026*
