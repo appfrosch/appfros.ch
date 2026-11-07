@@ -31,19 +31,15 @@ Neben deinem Text enthält der Entwurf technische Angaben: App-Version, Gerätem
 
 ## Werbung
 
-Dieser Abschnitt gilt nur für die oben mit Werbung markierten Apps. Die Werbung besteht aus kleinen Bannern für andere Apps. Sie erhält nie, was du in der App erstellst, und verfolgt weder dich noch dein Gerät über Apps oder Websites hinweg. Jede dieser Apps nutzt einen der folgenden Werbedienste.
+Dieser Abschnitt gilt nur für die oben mit Werbung markierten Apps. Die Werbung besteht aus kleinen Bannern für andere Apps. Sie erhält nie, was du in der App erstellst, und verfolgt weder dich noch dein Gerät über Apps oder Websites hinweg. Sie kommen von Kickstart Exchange.
 
-### Kickstart Exchange (WhosCookin)
+### Kickstart Exchange (WhosCookin, Mäxle!)
 
 [Kickstart Exchange](https://exchange.kickstart.tools) ordnet Werbung Apps zu, nicht Personen. Um eine Anzeige auszuwählen und zu zählen, erhält der Dienst nur Angaben zur App: welche App das Banner zeigt, ihre Version, die Plattform und das App-Store-Land. Ausserdem prüft er bei Apple, ob die App echt installiert wurde, ohne etwas zu speichern, das dich oder dein Gerät erkennbar macht. Aufzeichnungen darüber, welche Anzeigen gezeigt oder angetippt wurden, werden etwa 30 Tage aufbewahrt und lassen keine Rückschlüsse auf einzelne Personen zu. Einzelheiten stehen in der [Datenschutzerklärung von Kickstart Exchange](https://exchange.kickstart.tools/privacy).
 
-### Billboard (Mäxle!)
-
-[Billboard](https://github.com/hiddevdploeg/Billboard) lädt eine öffentliche Liste von Anzeigen und die Symbole der beworbenen Apps von Apple. Es sendet nichts über dich oder dein Gerät und nutzt weder Tracking noch Cookies.
-
 ### Werbung entfernen
 
-In WhosCookin entfernt WhosCookin Plus die Werbung, in Mäxle! jeder beliebige In-App-Kauf. Käufe wickelt vollständig Apple ab; deine Zahlungsdaten sehe ich nie.
+In WhosCookin entfernt WhosCookin Plus die Werbung, in Mäxle! das Freischalten aller vier Regelvarianten, einzeln oder im Paket. Käufe wickelt vollständig Apple ab; deine Zahlungsdaten sehe ich nie.
 
 ## TestFlight und App Store
 

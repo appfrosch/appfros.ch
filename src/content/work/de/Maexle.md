@@ -52,7 +52,7 @@ Optionale Regeln lassen sich in den Einstellungen aktivieren:
 • 31 dreht die Richtung – die Ansage 31 kehrt die Spielreihenfolge um.
 
 ### 🛡️ Datenschutz
-Mäxle! erhebt keine personenbezogenen Daten. Die kostenlose Version zeigt kleine Werbebanner über Billboard, ohne Tracking; jeder In-App-Kauf entfernt sie. Spielernamen und Einstellungen bleiben auf deinem Gerät. Siehe [Datenschutzerklärung](/de/privacy/).
+Mäxle! erhebt keine personenbezogenen Daten. Die kostenlose Version zeigt kleine Werbebanner über Kickstart Exchange, ohne Tracking; das Freischalten aller vier Regelvarianten entfernt sie. Spielernamen und Einstellungen bleiben auf deinem Gerät. Siehe [Datenschutzerklärung](/de/privacy/).
 
 ### ✉️ Kontakt
 Fragen? Erreich mich unter: splash@appfros.ch
